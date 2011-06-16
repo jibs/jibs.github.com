@@ -32,11 +32,12 @@ Okay, so this didnt *quite* work the second time round... this was resolved by
 
 Get rid of the lock files in the home directory:
 
-   rm ~/.X*
+  rm ~/.X*
 
 Run a simplified version of the server command (replace the `which xvfb`)
 
   sudo startx -- /usr/bin/Xvfb :1 -screen 0 1024x768x24 &
 
 then run the sel server with
+  
   DISPLAY=:1 sudo java -jar selenium-server-standalone-2.0rc2.jar
