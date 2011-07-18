@@ -14,6 +14,7 @@ emitted).
 
 So, do something like this:
 
+{% highlight js %}
 
   function doResponse (req, res) {
     //other handling code
@@ -46,9 +47,6 @@ So, do something like this:
     }	
   }
 
-
-{% highlight javascript %}
-  console.log('will this work?');
 {% endhighlight %}
 
 
