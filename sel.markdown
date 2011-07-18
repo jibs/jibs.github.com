@@ -1,18 +1,22 @@
+---
+title: Selenium
+layout: wikistyle
+---
+
 ### Installing Selenium on Ubuntu
 
 Download the full selenium standalone jar server from:
-	http://code.google.com/p/selenium/downloads/detail?name=selenium-server-standalone-2.0rc2.jar&can=2&q=
+  http://code.google.com/p/selenium/downloads/detail?name=selenium-server-standalone-2.0rc2.jar&can=2&q=
 
 Get the python bindings from
-    sudo pip install selenium
+  sudo pip install selenium
 
 Install firefox with
-		sudo apt-get install firefox
+  sudo apt-get install firefox
 
 Install startx etc:
 
 http://blog.martin-lyness.com/archives/installing-xvfb-on-ubuntu-9-10-karmic-koala
-
 
 
 startx -- `which Xvfb` :1 -screen 0 1024x768x24 2>&1 >/dev/null &
@@ -37,6 +41,14 @@ then re-run:
 
 sudo dpkg -i google-chrome-stable_current_amd64.deb 
 
+
+
+Update
+-------
+
+This was working, but in the end windows offers a much wider array of
+browser problem cases (at least its good for something), particularly
+the ie family, where most issues are likely to occur in any case.
 
 
 Ref
