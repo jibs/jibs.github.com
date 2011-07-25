@@ -6,8 +6,8 @@ layout: wikistyle
 Rants / random thoughts / learnings
 =====================
 
-* Selenium [http://jibs.github.com/sel](Selenium)
-* Nodejs [http://jibs.github.com/nodejs](Nodejs wiki from the
-  battlefront)
+* Selenium [Installing Selenium on Ec2 Ubuntu / Windows](http://jibs.github.com/sel)
+* Nodejs [Nodejs wiki from the battlefront](http://jibs.github.com/nodejs)
+* Sysadmin [Sysadmin for high performance COMET servers](./sys)
 
 
