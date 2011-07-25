@@ -1,3 +1,8 @@
+---
+title: Sysadmin snippets for high performance webservers
+layout: wikistyle
+---
+
 Sysadmin stuff
 ===================
 
