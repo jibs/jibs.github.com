@@ -1,3 +1,9 @@
+---
+title: Hadoop admin wiki
+layout: wikistyle
+---
+
+
 Hadoop - running a Hadoop cluster
 ================================
 
@@ -20,8 +26,16 @@ Gotchas:
 * Make sure you have the JDK (and not just the JRE)!
 
 For Cloudera distribution of hadoop, the second command looks like:
+    
+    mkdir /usr/lib/hadoop/lib/native
+    sudo cp hadoop-lzo-0.4.14.jar /usr/lib/hadoop/lib/
+    tar -cBf - -C /home/ubuntu/libs/hadoop-lzo/build/native/Linux-amd64-64 . | tar -xBvf - -C /usr/lib/hadoop/lib/native/
 
-tar -cBf - -C /home/ubuntu/libs/hadoop-lzo/build/native/Linux-amd64-64 . | tar -xBvf - -C /usr/lib/hadoop/lib/native/
+or for 32 bit machines:
+
+    mkdir /usr/lib/hadoop/lib/native
+    sudo cp hadoop-lzo-0.4.14.jar /usr/lib/hadoop/lib/
+    tar -cBf - -C /home/ubuntu/libs/hadoop-lzo/build/native/Linux-i386-32 . | tar -xBvf - -C /usr/lib/hadoop/lib/native/
 
 To test that it works:
 
@@ -34,9 +48,18 @@ To test that it works:
 
 in /home/ubuntu/conf/hadoop-env.sh:
 
+    sudo vim /usr/lib/hadoop/conf/hadoop-env.sh
+
     export JAVA_LIBRARY_PATH=$JAVA_LIBRARY_PATH:/usr/lib/hadoop-0.20/lib/native/Linux-amd64-64:/usr/lib/hadoop-0.20/lib/native:/usr/lib/hadoop/lib/native/lib
 
+For 32 bit
+
+    export JAVA_LIBRARY_PATH=$JAVA_LIBRARY_PATH:/usr/lib/hadoop-0.20/lib/native/Linux-i386-32:/usr/lib/hadoop-0.20/lib/native:/usr/lib/hadoop/lib/native/lib
+
+
 in .bashrc:
+
+
 
     #export HADOOP_INSTALL=/usr/lib/
     #export HADOOP_HOME=/usr/lib/hadoop
@@ -63,8 +86,19 @@ To test a barebones indexing of the lzo compressor:
     echo "hello world" > test.log
     lzop test.log
     hadoop fs -copyFromLocal test.log.lzo /tmp
-    hadoop jar /usr/lib/hadoop/lib/hadoop-lzo-0.4.13.jar com.hadoop.compression.lzo.LzoIndexer /tmp/test.log.lzo
+    hadoop jar /usr/lib/hadoop/lib/hadoop-lzo-0.4.14.jar com.hadoop.compression.lzo.LzoIndexer /tmp/test.log.lzo
 
+
+Using LZO indexing in hive:
+
+    CREATE EXTERNAL TABLE foo (
+             columnA string,
+             columnB string )
+        PARTITIONED BY (date string)
+        ROW FORMAT DELIMITED FIELDS TERMINATED BY "\t"
+        STORED AS INPUTFORMAT "com.hadoop.mapred.DeprecatedLzoTextInputFormat"
+              OUTPUTFORMAT "org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat"
+        LOCATION '/path/to/hive/tables/foo';
 
 
 
