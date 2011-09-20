@@ -11,7 +11,7 @@ Mysql on Python
 1. In the untarred dir edit setup.cfg to change the location of 
    mysql_cfg
 
-    mysql_config = /usr/local/mysql/bin/mysql_config
+        mysql_config = /usr/local/mysql/bin/mysql_config
 
 2. Make the following symlinks (via [http://stackoverflow.com/questions/4730787/python-import-mysqldb-error-mac-10-6](http://stackoverflow.com/questions/4730787/python-import-mysqldb-error-mac-10-6)):
 
