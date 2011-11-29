@@ -15,17 +15,22 @@ Why you need this: Gzip files are not indexable, which means (indirectly) that o
 
 * Grab the LZO bins from here: https://github.com/kevinweil/hadoop-lzo
 * This is an improved version of the libs available here: http://code.google.com/a/apache-extras.org/p/hadoop-gpl-compression/wiki/FAQ?redir=1 - but the build instructions remain the same
-* The 32-bit instructions are not relevant, so all you need is:
 
+Compiling:
+The 32-bit instructions are not relevant, so all you need is
+    
     export JAVA_HOME=/usr/lib/jvm/java-6-sun
     export CFLAGS=-m64
     export CXXFLAGS=-m64
     ant compile-native tar
 
+
 Gotchas:
 * Make sure you have the JDK (and not just the JRE)!
 
-For Cloudera distribution of hadoop, the second command looks like:
+Moving into place:
+
+For Cloudera distribution of hadoop, the second command looks like
     
     mkdir /usr/lib/hadoop/lib/native
     sudo cp hadoop-lzo-0.4.14.jar /usr/lib/hadoop/lib/
@@ -36,14 +41,6 @@ or for 32 bit machines:
     mkdir /usr/lib/hadoop/lib/native
     sudo cp hadoop-lzo-0.4.14.jar /usr/lib/hadoop/lib/
     tar -cBf - -C /home/ubuntu/libs/hadoop-lzo/build/native/Linux-i386-32 . | tar -xBvf - -C /usr/lib/hadoop/lib/native/
-
-To test that it works:
-
-    cd /tmp
-    echo "hello world" > test.log
-    lzop test.log
-    hadoop fs -copyFromLocal test.log.lzo /tmp
-    hadoop jar /usr/lib/hadoop/lib/hadoop-lzo-0.4.13.jar com.hadoop.compression.lzo.LzoIndexer /tmp/test.log.lzo
 
 
 in /home/ubuntu/conf/hadoop-env.sh:
@@ -58,8 +55,6 @@ For 32 bit
 
 
 in .bashrc:
-
-
 
     #export HADOOP_INSTALL=/usr/lib/
     #export HADOOP_HOME=/usr/lib/hadoop
@@ -99,6 +94,47 @@ Using LZO indexing in hive:
         STORED AS INPUTFORMAT "com.hadoop.mapred.DeprecatedLzoTextInputFormat"
               OUTPUTFORMAT "org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat"
         LOCATION '/path/to/hive/tables/foo';
+
+for more details see: http://www.mrbalky.com/2011/02/24/hive-tables-partitions-and-lzo-compression/
+
+
+Configs
+-------------
+
+mapred.site:
+
+    <property>
+    <name>mapreduce.map.output.compress</name>
+    <value>true</value>
+    </property>
+    <property>
+    <name>mapreduce.map.output.compress.codec</name>
+    <value>com.hadoop.compression.lzo.LzoCodec</value>
+    </property>
+
+core.site:
+
+    <property>
+    <name>io.compression.codecs</name>
+    <value>org.apache.hadoop.io.compress.GzipCodec,org.apache.hadoop.io.compress.DefaultCodec,org.apache.hadoop.io.compress.BZip2Codec,com.hadoop.compression.lzo.LzoCodec,com.hadoop.compression.lzo.LzopCodec</value>
+    </property>
+    <property>
+    <name>io.compression.codec.lzo.class</name>
+    <value>com.hadoop.compression.lzo.LzoCodec</value>
+    </property>
+    <property>
+      <name>mapreduce.map.output.compress.codec</name>
+      <value>com.hadoop.compression.lzo.LzoCodec</value>
+    </property>
+    <property>
+      <name>mapred.child.env</name>
+      <value>JAVA_LIBRARY_PATH=/usr/lib/hadoop/lib/native</value>
+    </property>
+    <property>
+      <name>mapred.child.env</name>
+      <value>JAVA_HOME=/usr/lib/jvm/java-6-sun</value>
+    </property>
+
 
 
 
