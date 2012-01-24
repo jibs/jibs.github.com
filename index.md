@@ -11,5 +11,5 @@ Rants / random thoughts / learnings
 * Sysadmin [Sysadmin for high performance COMET servers](./sys)
 * Mac OS X Installations [Joys of installing stuff / getting it working
   on a Mac](./osx)
-
-
+* Hadoop [Hadoop stuff](./hadoop)
+* Mongodb [Mongodb, the webscale nosql database](./mongodb)
