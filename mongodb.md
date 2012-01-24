@@ -1,4 +1,3 @@
-
 ---
 title: Mongodb - random snippets
 layout: wikistyle
