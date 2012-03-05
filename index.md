@@ -13,3 +13,4 @@ Rants / random thoughts / learnings
   on a Mac](./osx)
 * Hadoop [Hadoop stuff](./hadoop)
 * Mongodb [Mongodb, the webscale nosql database](./mongodb)
+* AWS [AWS stuff](./aws)
