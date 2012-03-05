@@ -50,7 +50,8 @@ see: https://gist.github.com/958833
 
 Use the following JSON snippet to give access to users to a specific S3 bucket folder on AWS:
 
-  {
+
+      {
       "Statement": [
       {
         "Effect": "Allow",
@@ -85,4 +86,5 @@ Use the following JSON snippet to give access to users to a specific S3 bucket f
         "Resource": "arn:aws:s3:::MYBUCKET/folder/*"
       }
     ]
-  }
+    }
+
