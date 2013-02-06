@@ -15,6 +15,9 @@ This will allow consumers to tranparently connect to the brokers. The only other
 
 Here is the commit for that to work [https://github.com/jibs/kafka/commit/9f8b57bc11c3092f1ee2d7387e392b758ac5ed03](https://github.com/jibs/kafka/commit/9f8b57bc11c3092f1ee2d7387e392b758ac5ed03)
 
+Cleaning up in Zookeeper after Kafka consumers is sometimes required (the Kafka consumer will store consumed offsets in zookeeper). See [kafka-zookeeper-cleanup](https://gist.github.com/jibs/4722063) that does this for you.
+
+
 <script type="text/javascript">
 
   var _gaq = _gaq || [];
